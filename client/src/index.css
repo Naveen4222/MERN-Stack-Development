@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+*{
+    margin: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 82.5%;
+}
