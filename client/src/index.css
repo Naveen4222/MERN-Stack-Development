@@ -1,11 +1,129 @@
 @import "tailwindcss";
 
-*{
+* {
     margin: 0;
     padding: 0 10px;
     box-sizing: border-box;
+    font-family: Urbanist, system-ui, Avenir, Helvetics, Arial, sans-serif;
+    color-scheme: light dark;
 }
 
-html{
+:root {
+    --bg-color: #f4f3ff;
+    --btn-color: #646cff;
+    --dark-color: #242424;
+    --helper-color: #99b9ff;
+}
+
+html {
     font-size: 82.5%;
+}
+
+/* base style */
+body {
+    margin: 0;
+    min-width: 32rem;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 5.4rem;
+    line-height: 1.1;
+    font-weight: bold;
+}
+
+p,
+li,
+label,
+input,
+textarea {
+    font-size: 1.8rem;
+    line-height: 1.56;
+    letter-spacing: 0.1rem;
+    word-spacing: 0.06rem;
+}
+
+a {
+    font-weight: 500;
+    font-size: 1.8rem;
+    letter-spacing: 0.1rem;
+    text-decoration: inherit;
+
+}
+
+li {
+    list-style: none;
+}
+
+/* layout design */
+
+.container {
+    max-width: 140rem;
+    padding: 4rem 2.4rem;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    gap: 6.5rem;
+}
+
+.grid-two-cols {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Module Rules Reusable */
+
+button {
+    text-transform: capitalize;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+    background-color: var(--btn-color);
+    border-radius: 0.8rem;
+    transition: border-color 0.3s;
+    --webkit-border-radius: 0.8rem;
+    -moz-border-radius: 0.8rem;
+    -ms-border-radius: 0.8rem;
+    -o-border-radius: 0.8rem;
+    border: 0.1rem solid transparent;
+    cursor: pointer;
+    letter-spacing: 0.1rem;
+}
+
+/* state rule */
+
+button:hover {
+    box-shadow: inset 0 0 0 0.2rem var(--bg-color);
+
+}
+
+a:hover,
+a.active {
+    color: #535bf2
+}
+
+/* Hero Section */
+.section-hero {
+    & .grid {
+        align-items: center;
+    }
+
+
+    .hero-content {
+        & p {
+            margin: 2.4rem 0 4.8rem 0;
+
+            &:first-child {
+                margin: 0 0 1.2rem 0;
+            }
+        }
+    }
+    .hero-image{
+        justify-items: center ;
+        &:img{
+            height: auto;
+            width: 70%;
+        }
+    }
 }
