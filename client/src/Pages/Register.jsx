@@ -30,7 +30,7 @@ export const Register = () => {
         <>
             <div className="container">
                 <div>
-                    <img src="E:\MERN\client\src\assets\photo-1491466424936-e304919aada7.png" alt="Image Loading" />
+                    <img src="./images/register.png" alt="Image Loading" />
                 </div>
                 <div className="container">
                     <form onSubmit={handleformSubmit}>
@@ -44,10 +44,11 @@ export const Register = () => {
                         <input type="password" name="password" id="password" value={user.password} onChange={handleInputChange} />
 
                     </form>
+                    <div>
+                        <button type="submit" onClick={handleformSubmit}>Register Now</button>
+                    </div>
                 </div>
-                <div>
-                    <button type="submit" onClick={handleformSubmit}>Register Now</button>
-                </div>
+
             </div>
         </>
     )
