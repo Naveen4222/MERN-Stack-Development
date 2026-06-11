@@ -1,6 +1,7 @@
 import { useState } from "react"
 import './register.css'
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../store/auth"
 
 
 
@@ -15,6 +16,7 @@ export const Register = () => {
 
 
     const navigate = useNavigate();
+    const { storeTokenInLS } = useAuth();
 
 
     const handleInputChange = (e) => {
@@ -27,7 +29,7 @@ export const Register = () => {
         })
     }
     const handleformSubmit = async (e) => {
-        event.preventDefault(e);
+        e.preventDefault();
         console.log(user);
         try {
             const response = await fetch(`http://localhost:5000/register`, {
@@ -40,6 +42,11 @@ export const Register = () => {
             console.log(response)
 
             if (response.ok) {
+                const res_data = await response.json();
+                // store the token in localhost;
+                storeTokenInLS(res_data.token);
+                // localStorage.setItem('token', res_data);
+                console.log('res from server', res_data);
                 setUser({
                     username: "",
                     phone: "",
@@ -72,11 +79,11 @@ export const Register = () => {
                         <input type="email" name="email" id="email" value={user.email} onChange={handleInputChange} />
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password" id="password" value={user.password} onChange={handleInputChange} />
-
+                        <div>
+                            <button type="submit" onClick={handleformSubmit}>Register Now</button>
+                        </div>
                     </form>
-                    <div>
-                        <button type="submit" onClick={handleformSubmit}>Register Now</button>
-                    </div>
+
                 </div>
 
             </div>
