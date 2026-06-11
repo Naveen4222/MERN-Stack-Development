@@ -1,32 +1,56 @@
 import { useState } from "react";
 
-export const Contact = ()=>{
+export const Contact = () => {
 
-    const [contact,setContact] = useState({
-        username:"",
-        email:"",
-        message:""
+    const [contact, setContact] = useState({
+        username: "",
+        email: "",
+        message: ""
     })
 
-    const handleInputChange = (e)=>{
+    const handleInputChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
 
         setContact({
             ...contact,
-            [name]:value
+            [name]: value
         })
     }
 
-    const handleFormSubmit = (e)=>{
+    const handleFormSubmit = async (e) => {
         event.preventDefault(e);
         console.log(contact);
+        try {
+            const response = await fetch(`http://localhost:5000/contact`, {
+                method: "Post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(contact)
+            });
+            console.log(contact);
+
+            if (response.ok) {
+                setContact({
+                    username: "",
+                    email: "",
+                    message: ""
+                });
+                
+
+            }
+
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
     return (
         <>
-       <div className="container">
+            <div className="container">
                 <div>
-                    <img src="./images/login.png" alt="Image Loading" width="400" height="500"/>
+                    <img src="./images/login.png" alt="Image Loading" width="400" height="500" />
                 </div>
                 <div>
                     <form onSubmit={handleFormSubmit}>
@@ -38,7 +62,7 @@ export const Contact = ()=>{
                         <textarea name="message" id="message" rows="10" cols="20" value={contact.message} onChange={handleInputChange}></textarea>
                     </form>
                     <div>
-                        <button type="submit" onClick={handleFormSubmit}>Login</button>
+                        <button type="submit" onClick={handleFormSubmit}>Submit</button>
                     </div>
                 </div>
             </div>
