@@ -12,6 +12,8 @@ import Contact from "../models/contact-model.js";
 import bcrypt from "bcryptjs";
 
 
+// Home page logic 
+
 export const home = async (req, res) => {
     try {
         res.status(200).send("Welcome to Home Page");
@@ -28,6 +30,8 @@ export const home = async (req, res) => {
 //5 Save to DB: Save user data to the database.
 //6 Respond: Respond with "Registration Successful" or handle errors 
 
+
+// USER Register logic
 export const register = async (req, res) => {
     try {
         // console.log(req.body);
@@ -72,6 +76,20 @@ export const login = async(req, res)=>{
    } catch (error) {
     res.status(500).json("Internal Server error")
    }
+}
+
+// to send user data / user logic
+
+export const user = async(req, res)=>{
+    try {
+        const userData = req.user;
+        console.log(userData);
+     return res.status(200).json({msg:userData});        
+    } catch (error) {
+        res.status(500).json({message:"Internal Server error"});
+        
+    }
+
 }
 
 // In most cases, converting _id to a string is a good practice because it ensures consistency
