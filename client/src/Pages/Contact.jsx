@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../store/auth";
 
 export const Contact = () => {
 
@@ -6,7 +7,27 @@ export const Contact = () => {
         username: "",
         email: "",
         message: ""
-    })
+    });
+    
+
+    const [userData,setUserData]= useState(true);
+
+    const { user } = useAuth();
+    console.log(user);
+
+
+  
+        if(userData && user){
+        setContact({
+            username: user.username,
+            email: user.email,
+            message:"",
+        });
+        setUserData(false);
+    }
+    
+    
+
 
     const handleInputChange = (e) => {
         let name = e.target.name;
@@ -19,7 +40,7 @@ export const Contact = () => {
     }
 
     const handleFormSubmit = async (e) => {
-        event.preventDefault(e);
+        e.preventDefault();
         console.log(contact);
         try {
             const response = await fetch(`http://localhost:5000/contact`, {
@@ -37,7 +58,7 @@ export const Contact = () => {
                     email: "",
                     message: ""
                 });
-                
+
 
             }
 
@@ -46,6 +67,8 @@ export const Contact = () => {
             console.log(e)
         }
     }
+
+
     return (
         <>
             <div className="container">
