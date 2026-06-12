@@ -84,7 +84,7 @@ export const user = async (req, res) => {
     try {
         const userData = req.user;
         console.log(userData);
-        return res.status(200).json({ msg: userData });
+        return res.status(200).json({ userData });
     } catch (error) {
         res.status(500).json({ message: "Internal Server error" });
 
