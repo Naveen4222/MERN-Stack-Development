@@ -5,16 +5,19 @@
 
 
 import { Router } from "express";
-import { home, register, login } from "../controller/auth-controller.js";
+import { home, register, login , user } from "../controller/auth-controller.js";
 import { validate } from "../middleware/validate-middleware.js";
 import signupSchema from "../validator/auth-validator.js";
 import { loginSchema } from "../validator/loginSchema.js";
+import { authMiddleWare } from "../middleware/authMiddleWare.js";
 const router = Router();
 
 router.get("/", home);
 router.post("/register", validate(signupSchema), register);
 
 router.post("/login", validate(loginSchema),login);
+
+router.get("/user", authMiddleWare, user);
 
 const userRoute = router;
 
