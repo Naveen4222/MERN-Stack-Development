@@ -47,7 +47,7 @@ export const register = async (req, res) => {
         // const hash_password = await bcrypt.hash(password, saltRound);
 
         const userCreated = await User.create({ username, email, phone, password });
-        res.status(200).json({ message:"Registration Successful", token: await userCreated.generateToken() , userId:userCreated._id.toString()});
+        res.status(200).json({ message: "Registration Successful", token: await userCreated.generateToken(), userId: userCreated._id.toString() });
 
 
     } catch (error) {
@@ -57,43 +57,43 @@ export const register = async (req, res) => {
 
 // User Login Logic
 
-export const login = async(req, res)=>{
-   try {
-    const {email, password}= req.body;
-    const userExist = await User.findOne({email:email});
-     console.log(userExist)
-    if(!userExist){
-        return res.status(400).json({message:"Invalid Credentials"})
-    }
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const userExist = await User.findOne({ email: email });
+        console.log(userExist)
+        if (!userExist) {
+            return res.status(400).json({ message: "Invalid Credentials" })
+        }
 
-    const isPasswordValid = await userExist.comparePassword(password);
-    if(isPasswordValid){
-        return res.status(200).json({message:"Login Successful", token: await userExist.generateToken(), userId:userExist._id.toString()})
+        const isPasswordValid = await userExist.comparePassword(password);
+        if (isPasswordValid) {
+            return res.status(200).json({ message: "Login Successful", token: await userExist.generateToken(), userId: userExist._id.toString() })
+        }
+        else {
+            res.status(400).json({ message: "Invalid Email or Password" });
+        }
+    } catch (error) {
+        res.status(500).json("Internal Server error")
     }
-    else{
-        res.status(400).json({message:"Invalid Email or Password"});
-    }
-   } catch (error) {
-    res.status(500).json("Internal Server error")
-   }
 }
 
 // to send user data / user logic
 
-export const user = async(req, res)=>{
+export const user = async (req, res) => {
     try {
         const userData = req.user;
         console.log(userData);
-     return res.status(200).json({msg:userData});        
+        return res.status(200).json({ msg: userData });
     } catch (error) {
-        res.status(500).json({message:"Internal Server error"});
-        
+        res.status(500).json({ message: "Internal Server error" });
+
     }
 
 }
 
 // In most cases, converting _id to a string is a good practice because it ensures consistency
-// and compatibility across different JWT libraries and systems. It also aligns with the 
+// and compatibility across different JWT libraries and systems. It also aligns with the
 // expectation that claims in a JWT are repersented as strings.
 
 
