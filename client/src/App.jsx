@@ -7,6 +7,7 @@ import { Contact } from "./Pages/Contact";
 import { Register } from "./Pages/Register";
 import { Login } from "./Pages/Login";
 import { Error } from "./Pages/Error";
+import { LogOut } from "./Pages/Logout";
 
 const router = createBrowserRouter([
   {
@@ -38,9 +39,14 @@ const router = createBrowserRouter([
       element:<Contact/>
     },
     {
+      path:"/logout",
+      element:<LogOut/>
+    },
+    {
       path:"*",
       element:<Error/>
     }
+    
   ]
   }
 ])
