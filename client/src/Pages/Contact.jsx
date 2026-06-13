@@ -8,25 +8,23 @@ export const Contact = () => {
         email: "",
         message: ""
     });
-    
 
-    const [userData,setUserData]= useState(true);
+
+    const [userData, setUserData] = useState(true);
 
     const { user } = useAuth();
     console.log(user);
 
 
-  
-        if(userData && user){
+
+    if (userData && user) {
         setContact({
             username: user.username,
             email: user.email,
-            message:"",
+            message: "",
         });
         setUserData(false);
     }
-    
-    
 
 
     const handleInputChange = (e) => {
@@ -58,10 +56,7 @@ export const Contact = () => {
                     email: "",
                     message: ""
                 });
-
-
             }
-
         }
         catch (e) {
             console.log(e)
