@@ -6,6 +6,7 @@ import { connectDb } from "./utils/db.js";
 import { errorMiddleware } from "./middleware/error-middleware.js";
 import contactRouter from "./router/contact-router.js";
 import cors from "cors";
+import ServiceRoute from "./router/service-route.js";
 
 
 const app = express(); 
@@ -26,6 +27,7 @@ app.use(express.json());
 
 app.use(userRoute);
 app.use(contactRouter);
+app.use(ServiceRoute);
 
 // app.get("/", (req,res)=>{
 //     res.status(200).send("Welcome to MERN learning");
